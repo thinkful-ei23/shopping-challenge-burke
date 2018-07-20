@@ -1,17 +1,33 @@
 //copied code
 
-const STORE = [
+//user stories
+
+// User can press a switch/checkbox to toggle between displaying all items or displaying only items that are unchecked
+
+
+
+
+
+
+// User can type in a search term and the displayed list will be filtered by item names only containing that search term
+// User can edit the title of an item
+  //possible way to edit text contenteditable="true" onclick='$(this).focus();'
+
+const STORE = {
+  items: [
   {name: "apples", checked: false},
   {name: "oranges", checked: false},
   {name: "milk", checked: true},
   {name: "bread", checked: false}
-];
+  ],
+  displayOnlyUnchecked: true
+};
 
 
 function generateItemElement(item, itemIndex, template) {
   return `
     <li class="js-item-index-element" data-item-index="${itemIndex}">
-      <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
+      <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : '' }">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
             <span class="button-label">check</span>
@@ -32,7 +48,7 @@ function generateShoppingItemsString(shoppingList) {
 function renderShoppingList() {
    // render the shopping list in the DOM
    console.log('`renderShoppingList` ran');
-   const shoppingListItemsString = generateShoppingItemsString(STORE);
+   const shoppingListItemsString = generateShoppingItemsString(STORE.items);
   
    // insert that HTML into the DOM
    $('.js-shopping-list').html(shoppingListItemsString);
@@ -40,7 +56,7 @@ function renderShoppingList() {
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
-  STORE.push({name: itemName, checked: false});
+  STORE.items.push({name: itemName, checked: false});
 }
 
 function handleNewItemSubmit() {
@@ -56,7 +72,7 @@ function handleNewItemSubmit() {
 
 function toggleCheckedForListItem(itemIndex) {
   console.log("Toggling checked property for item at index " + itemIndex);
-  STORE[itemIndex].checked = !STORE[itemIndex].checked;
+  STORE.items[itemIndex].checked = !STORE.items[itemIndex].checked;
 }
 
 function getItemIndexFromElement(item) {
@@ -79,7 +95,7 @@ function handleItemCheckClicked() {
 //begin written code
 
 function deleteSelectedListItem(itemIndex) {
-  STORE.splice(itemIndex, 1);
+  STORE.items.splice(itemIndex, 1);
 }
 
 function handleDeleteItemClicked() {
