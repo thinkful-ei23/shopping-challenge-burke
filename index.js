@@ -21,6 +21,7 @@ function generateItemElement(item, itemIndex, template) {
         </button>
       </div>
     </li>`;
+}
 
 function generateShoppingItemsString(shoppingList) {
   console.log("Generating shopping list element");
@@ -74,9 +75,11 @@ function handleItemCheckClicked() {
   });
 }
 //end copied code
+
 //begin written code
+
 function deleteSelectedListItem(itemIndex) {
-  STORE.splice([itemIndex], 1);
+  STORE.splice(itemIndex, 1);
 }
 
 function handleDeleteItemClicked() {
@@ -85,6 +88,7 @@ function handleDeleteItemClicked() {
     const itemIndex = getItemIndexFromElement(event.currentTarget);
     deleteSelectedListItem(itemIndex);
     renderShoppingList();
+  });
 }
 
 //start copied code
