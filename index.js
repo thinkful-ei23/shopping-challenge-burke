@@ -51,7 +51,7 @@ function renderShoppingList() {
    }
    if (STORE.searchName !== '') {
     console.log("in search filter list");     
-    filteredList = filteredList.filter(element => element.name === STORE.searchName);
+    filteredList = filteredList.filter(element => element.name.startsWith(STORE.searchName));
    }
    // if searching === true
     // iterate through each item, adding it to filteredList if it is the search term 
@@ -133,11 +133,32 @@ function changeWhatToSearch(word) {
   STORE.searchName = word;
 }
 
-function toggleBackButton() {
-  $('.js-search-back').hasClass('hide') ? $('.js-search-back').removeClass('hide') : $('.js-search-back').addClass('hide'); 
+function showBackButton() {
+  if ($('.js-search-back').hasClass('hide')) {
+    $('.js-search-back').removeClass('hide');
+  }
 }
 
+function hideBackButton() {
+  $('.js-search-back').addClass('hide');
+}
+
+// we want the toggle button to be visible when there is some value in the search bar
+//
+
 function handleNewSearch() {
+  $('#js-search-form').on('keyup', function(event) {
+    console.log("in handle new search")
+    const searchName = $('.js-search-list').val();
+    console.log(searchName);
+    changeWhatToSearch(searchName);
+    renderShoppingList();
+    if (searchName === "") {
+      hideBackButton();
+    } else {
+    showBackButton();
+    }
+  });
   $('#js-search-form').submit(function(event) {
     console.log("in handle new search")
     event.preventDefault();
@@ -146,16 +167,18 @@ function handleNewSearch() {
     $('.js-search-list').val('');
     changeWhatToSearch(searchName);
     renderShoppingList();
-    toggleBackButton();
+    showBackButton();
   });
 }
 
 function handleBackButton() {
   $('.js-search-back').on('click', function(event) {
     console.log('in back function')
-    changeWhatToSearch('');
-    toggleBackButton();
+    const searchName = '';
+    changeWhatToSearch(searchName);
     renderShoppingList();
+    hideBackButton();
+    $('.js-search-list').val('');
   });
 }
 
