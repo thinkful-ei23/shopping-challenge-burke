@@ -182,6 +182,27 @@ function handleBackButton() {
   });
 }
 
+function changeNameValue(newName, index) {
+  STORE.items[index].name = newName;
+}
+
+function handleEditableItems() {
+  $('.js-shopping-list').on('keypress', '.js-shopping-item',  function(event) {
+      if(event.which == 13) {
+        const newName = $(event.currentTarget).text();
+        const index = $(event.currentTarget).closest('li').attr('data-item-index');
+        changeNameValue(newName, index);
+        renderShoppingList();
+      }
+  });
+  $('.js-shopping-list').on('blur', '.js-shopping-item',  function(event) {
+      const newName = $(event.currentTarget).text();
+      const index = $(event.currentTarget).closest('li').attr('data-item-index');
+      changeNameValue(newName, index);
+      renderShoppingList();
+});
+
+}
 
 //start copied code
 
@@ -195,6 +216,7 @@ function handleShoppingList() {
   handleToggleUncheckedItems();
   handleNewSearch();
   handleBackButton();
+  handleEditableItems();
 }
 
 // when the page loads, call `handleShoppingList`
