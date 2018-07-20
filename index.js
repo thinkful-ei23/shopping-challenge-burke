@@ -3,15 +3,14 @@
 //user stories
 
 // User can press a switch/checkbox to toggle between displaying all items or displaying only items that are unchecked
-
-// first, create an html button that will be the toggle button (works)
-// second, set up a function that will listen for a button click 
-
-
-
-
+//completed
 
 // User can type in a search term and the displayed list will be filtered by item names only containing that search term
+
+
+
+
+
 // User can edit the title of an item
   //possible way to edit text contenteditable="true" onclick='$(this).focus();'
 
@@ -137,7 +136,6 @@ function handleShoppingList() {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleToggleUncheckedItems();
-
 }
 
 // when the page loads, call `handleShoppingList`
