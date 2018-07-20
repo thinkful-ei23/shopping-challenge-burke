@@ -50,7 +50,11 @@ function generateShoppingItemsString(shoppingList) {
 function renderShoppingList() {
    // render the shopping list in the DOM
    console.log('`renderShoppingList` ran');
-   const shoppingListItemsString = generateShoppingItemsString(STORE.items);
+   let filteredList = [ ...STORE.items ];
+   if (STORE.displayOnlyUnchecked === true) {
+      filteredList.filter(element => element.checked === true)
+   } 
+   const shoppingListItemsString = generateShoppingItemsString(filteredList);
   
    // insert that HTML into the DOM
    $('.js-shopping-list').html(shoppingListItemsString);
@@ -117,6 +121,7 @@ function changeToggleStatus() {
 function handleToggleUncheckedItems() {
   $('.js-all-items-toggle').click(event => {
     console.log('`handleToggleUncheckedItems ran');
+    changeToggleStatus();
     // change our handleToggleUncheckedItems to true or false
     renderShoppingList();
 }
