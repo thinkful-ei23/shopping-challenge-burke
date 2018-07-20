@@ -52,7 +52,7 @@ function renderShoppingList() {
    console.log('`renderShoppingList` ran');
    let filteredList = [ ...STORE.items ];
    if (STORE.displayOnlyUnchecked === true) {
-      filteredList.filter(element => element.checked === true)
+      filteredList = filteredList.filter(element => element.checked === false)
    } 
    const shoppingListItemsString = generateShoppingItemsString(filteredList);
   
@@ -124,6 +124,7 @@ function handleToggleUncheckedItems() {
     changeToggleStatus();
     // change our handleToggleUncheckedItems to true or false
     renderShoppingList();
+});
 }
 
 //start copied code
@@ -135,6 +136,7 @@ function handleShoppingList() {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
+  handleToggleUncheckedItems();
 
 }
 
