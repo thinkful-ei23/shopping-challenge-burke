@@ -6,11 +6,9 @@
 //completed
 
 // User can type in a search term and the displayed list will be filtered by item names only containing that search term
-
-
+//completed, but I don't have a back button
 // User can edit the title of an item
-  //possible way to edit text contenteditable="true" onclick='$(this).focus();'
-
+//completed, but it requires clicking away from item
 const STORE = {
   items: [
   {name: "apples", checked: false},
@@ -135,6 +133,10 @@ function changeWhatToSearch(word) {
   STORE.searchName = word;
 }
 
+function toggleBackButton() {
+  $('.js-search-back').hasClass('hide') ? $('.js-search-back').removeClass('hide') : $('.js-search-back').addClass('hide'); 
+}
+
 function handleNewSearch() {
   $('#js-search-form').submit(function(event) {
     console.log("in handle new search")
@@ -144,7 +146,16 @@ function handleNewSearch() {
     $('.js-search-list').val('');
     changeWhatToSearch(searchName);
     renderShoppingList();
+    toggleBackButton();
+  });
+}
+
+function handleBackButton() {
+  $('.js-search-back').submit(function(event) {
+    event.preventDefault();
     changeWhatToSearch('');
+    toggleBackButton();
+    renderShoppingList();
   });
 }
 
