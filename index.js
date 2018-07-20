@@ -6,6 +6,12 @@
 //completed
 
 // User can type in a search term and the displayed list will be filtered by item names only containing that search term
+// added a form
+// listen for user information
+// do something with that user information
+// update the render function
+// link all functions up
+
 
 
 
@@ -21,7 +27,8 @@ const STORE = {
   {name: "milk", checked: true},
   {name: "bread", checked: false}
   ],
-  displayOnlyUnchecked: false
+  displayOnlyUnchecked: false,
+  searchName: ''
 };
 
 
@@ -50,9 +57,15 @@ function renderShoppingList() {
    // render the shopping list in the DOM
    console.log('`renderShoppingList` ran');
    let filteredList = [ ...STORE.items ];
-   if (STORE.displayOnlyUnchecked === true) {
+   if (STORE.displayOnlyUnchecked === true && STORE.searchName === '') {
       filteredList = filteredList.filter(element => element.checked === false)
-   } 
+   }
+   if (STORE.searchName !== '') {
+    console.log("in search filter list");     
+    filteredList = filteredList.filter(element => element.name === STORE.searchName);
+   }
+   // if searching === true
+    // iterate through each item, adding it to filteredList if it is the search term 
    const shoppingListItemsString = generateShoppingItemsString(filteredList);
   
    // insert that HTML into the DOM
@@ -126,6 +139,25 @@ function handleToggleUncheckedItems() {
 });
 }
 
+function changeWhatToSearch(word) {
+  console.log("in change what to search")
+  STORE.searchName = word;
+}
+
+function handleNewSearch() {
+  $('#js-search-form').submit(function(event) {
+    console.log("in handle new search")
+    event.preventDefault();
+    const searchName = $('.js-search-list').val();
+    console.log(searchName);
+    $('.js-search-list').val('');
+    changeWhatToSearch(searchName);
+    renderShoppingList();
+    changeWhatToSearch('');
+  });
+}
+
+
 //start copied code
 
 // This function will intially call renderShoppingList and our other handler functions, which will
@@ -136,6 +168,7 @@ function handleShoppingList() {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleToggleUncheckedItems();
+  handleNewSearch();
 }
 
 // when the page loads, call `handleShoppingList`
