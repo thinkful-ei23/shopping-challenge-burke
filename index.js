@@ -6,15 +6,6 @@
 //completed
 
 // User can type in a search term and the displayed list will be filtered by item names only containing that search term
-// added a form
-// listen for user information
-// do something with that user information
-// update the render function
-// link all functions up
-
-
-
-
 
 
 // User can edit the title of an item
@@ -35,7 +26,7 @@ const STORE = {
 function generateItemElement(item, itemIndex, template) {
   return `
     <li class="js-item-index-element" data-item-index="${itemIndex}">
-      <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : '' }">${item.name}</span>
+      <span contenteditable="true" class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : '' }">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
             <span class="button-label">check</span>
