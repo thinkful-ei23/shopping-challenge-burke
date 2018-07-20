@@ -151,8 +151,8 @@ function handleNewSearch() {
 }
 
 function handleBackButton() {
-  $('.js-search-back').submit(function(event) {
-    event.preventDefault();
+  $('.js-search-back').on('click', function(event) {
+    console.log('in back function')
     changeWhatToSearch('');
     toggleBackButton();
     renderShoppingList();
@@ -171,6 +171,7 @@ function handleShoppingList() {
   handleDeleteItemClicked();
   handleToggleUncheckedItems();
   handleNewSearch();
+  handleBackButton();
 }
 
 // when the page loads, call `handleShoppingList`
