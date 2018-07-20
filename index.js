@@ -4,6 +4,8 @@
 
 // User can press a switch/checkbox to toggle between displaying all items or displaying only items that are unchecked
 
+// first, create an html button that will be the toggle button (works)
+// second, set up a function that will listen for a button click 
 
 
 
@@ -20,7 +22,7 @@ const STORE = {
   {name: "milk", checked: true},
   {name: "bread", checked: false}
   ],
-  displayOnlyUnchecked: true
+  displayOnlyUnchecked: false
 };
 
 
@@ -105,6 +107,18 @@ function handleDeleteItemClicked() {
     deleteSelectedListItem(itemIndex);
     renderShoppingList();
   });
+}
+
+function changeToggleStatus() {
+  STORE.displayOnlyUnchecked = ! STORE.displayOnlyUnchecked;
+  console.log('changeToggleStatus is running');
+}
+ 
+function handleToggleUncheckedItems() {
+  $('.js-all-items-toggle').click(event => {
+    console.log('`handleToggleUncheckedItems ran');
+    // change our handleToggleUncheckedItems to true or false
+    renderShoppingList();
 }
 
 //start copied code
