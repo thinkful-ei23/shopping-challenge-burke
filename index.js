@@ -146,18 +146,21 @@ function hideBackButton() {
 // we want the toggle button to be visible when there is some value in the search bar
 //
 
+// when you enter in search, rather than pressing the button, it returns all. i think it has to do with keyup
 function handleNewSearch() {
   $('#js-search-form').on('keyup', function(event) {
-    console.log("in handle new search")
-    const searchName = $('.js-search-list').val();
-    console.log(searchName);
-    changeWhatToSearch(searchName);
-    renderShoppingList();
-    if (searchName === "") {
-      hideBackButton();
-    } else {
-    showBackButton();
-    }
+    if(event.which !== 13) {
+      console.log("in handle new search")
+      const searchName = $('.js-search-list').val();
+      console.log(searchName);
+      changeWhatToSearch(searchName);
+      renderShoppingList();
+      if (searchName === "") {
+        hideBackButton();
+      } else {
+      showBackButton();
+      }
+  }
   });
   $('#js-search-form').submit(function(event) {
     console.log("in handle new search")
