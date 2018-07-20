@@ -60,6 +60,10 @@ function renderShoppingList() {
    if (STORE.displayOnlyUnchecked === true && STORE.searchName === '') {
       filteredList = filteredList.filter(element => element.checked === false)
    }
+   if (STORE.searchName !== '') {
+    console.log("in search filter list");     
+    filteredList = filteredList.filter(element => element.name === STORE.searchName);
+   }
    // if searching === true
     // iterate through each item, adding it to filteredList if it is the search term 
    const shoppingListItemsString = generateShoppingItemsString(filteredList);
@@ -136,11 +140,13 @@ function handleToggleUncheckedItems() {
 }
 
 function changeWhatToSearch(word) {
+  console.log("in change what to search")
   STORE.searchName = word;
 }
 
 function handleNewSearch() {
   $('#js-search-form').submit(function(event) {
+    console.log("in handle new search")
     event.preventDefault();
     const searchName = $('.js-search-list').val();
     console.log(searchName);
@@ -148,7 +154,6 @@ function handleNewSearch() {
     changeWhatToSearch(searchName);
     renderShoppingList();
     changeWhatToSearch('');
-
   });
 }
 
@@ -163,6 +168,7 @@ function handleShoppingList() {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleToggleUncheckedItems();
+  handleNewSearch();
 }
 
 // when the page loads, call `handleShoppingList`
